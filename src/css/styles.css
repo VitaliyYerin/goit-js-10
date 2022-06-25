@@ -29,23 +29,23 @@ body {
   margin-bottom: 10px;
 }
 
-.wrapp {
+.country-heading {
   display: flex;
   align-items: center;
 }
 
-.wrapp h1 {
+.country-heading .title {
   font-size: 16px;
   font-weight: 600;
   margin: 0 0 0 10px;
 }
 
-.wrapp img {
+.country-heading img {
   width: 30px;
   height: 100%;
 }
 
-.country-info .wrapp {
+.country-info .country-heading {
   margin-bottom: 10px;
 }
 

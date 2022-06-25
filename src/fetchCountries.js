@@ -7,10 +7,7 @@ export default function fetchCountries(name) {
       if (response.ok) {
         return response.json();
       }
-      if (response.status === 404) {
-        Notify.failure("Oops, there is no country with that name");
-      }
-      if (response.status >= 500) {
+      if (!response.ok) {
         Notify.failure("Oops, there is no country with that name");
       }
       return Promise.reject(response.text() || response.status);

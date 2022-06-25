@@ -14,8 +14,8 @@ function findCountry(e) {
   const findToCountry = e.target.value.trim();
 
   if (!findToCountry) {
-    clearMarkupList();
-    clearMarkupInfo();
+    clearCountryList();
+    clearCountryInfo();
     return;
   }
 
@@ -24,52 +24,52 @@ function findCountry(e) {
         if (response.length > 10) {
           Notify.info("Too many matches found. Please enter a more specific name.")
         }
-        clearMarkupList()
-        clearMarkupInfo()
+        clearCountryList()
+        clearCountryInfo()
 
         if (response.length === 1) {
           renderCountry(response)
-          clearMarkupList()
+          clearCountryList()
         } else if (response.length > 1 && response.length <= 10) {
           renderCountryList(response)
         }
       }
     ).catch(() => {
-      clearMarkupInfo();
-      clearMarkupList();
+      clearCountryInfo();
+      clearCountryList();
   });
 }
 
 function renderCountry(items) {
-  const markup = items.map(({name, capital, population, languages, flags}) =>
+  const countryInfoEl = items.map(({name, capital, population, languages, flags}) =>
     `
-       <div class = "wrapp">
+       <div class = "country-heading">
        <img src="${flags.svg}" alt = "flag" width = 30px height = 30px>
-       <h1 class = "title"> ${name.common}<h1>
+       <span class = "title"> ${name.common}</span>
        </div>
        <p><strong>Capital:</strong> ${capital}</p>
        <p><strong>Population:</strong> ${population}</p>
        <p><strong>Languages:</strong> ${Object.values(languages).join(', ')}</p>
       `)
-  countryInfo.insertAdjacentHTML("afterbegin", markup)
+  countryInfo.insertAdjacentHTML("afterbegin", countryInfoEl)
 }
 
 function renderCountryList(items) {
-  const markupList = items.map(({name, flags}) =>
+  const countryListEl = items.map(({name, flags}) =>
     `<li>
-       <div class = "wrapp">
+       <div class = "country-heading">
        <img src="${flags.svg}" alt = "flag" width = 30px height = 30px>
-       <h1 class = "title"> ${name.common}<h1>
+       <span class = "title"> ${name.common}</span>
        </div>
        </li>
       `).join("")
-  countryList.insertAdjacentHTML("afterbegin", markupList)
+  countryList.insertAdjacentHTML("afterbegin", countryListEl)
 }
 
-function clearMarkupInfo() {
+function clearCountryInfo() {
   countryInfo.innerHTML = ""
 }
 
-function clearMarkupList() {
+function clearCountryList() {
   countryList.innerHTML = ""
 }
