@@ -1,68 +1,47 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import  fetchCountries from "./fetchCountries"
+import fetchCountries from "./fetchCountries"
 
 const DEBOUNCE_DELAY = 300;
 const input = document.querySelector("#search-box")
 const countryList = document.querySelector(".country-list")
 const countryInfo = document.querySelector(".country-info")
-console.log(input);
-console.log(countryList);
-console.log(countryInfo);
-
-
-
 
 input.addEventListener("input", debounce(findCountry, DEBOUNCE_DELAY))
 
-
 function findCountry(e) {
+  const findToCountry = e.target.value.trim();
 
-  const findToCountry = e.target.value.trim()
-  const findToCountryData = e.data
-
-
-  // console.log(findToCountry);
-  if (findToCountry !== "" && findToCountryData !== " ") {
-
-    fetchCountries(findToCountry)
-      .then(response => {
-
-          if (Number(response.status) === 404) {
-            Notify.failure("Oops, there is no country with that name");
-          }
-          if (response.length > 10) {
-            Notify.info("Too many matches found. Please enter a more specific name.")
-          }
-          if (findToCountry === "") {
-            clearMarcupList()
-            clearMarcupInfo()
-          }
-          clearMarcupList()
-          clearMarcupInfo()
-
-          if (response.length === 1) {
-            renderCountry(response)
-            // console.log(response.length);
-            clearMarcupList()
-
-          }
-          else if (response.length > 1 && response.length <= 10) {
-            renderCountryList(response)
-
-          }
-
-        }
-      )
-
-      .catch(error => {
-        console.log(error);
-      })
+  if (!findToCountry) {
+    clearMarkupList();
+    clearMarkupInfo();
+    return;
   }
+
+  fetchCountries(findToCountry)
+    .then(response => {
+        if (response.length > 10) {
+          Notify.info("Too many matches found. Please enter a more specific name.")
+        }
+        clearMarkupList()
+        clearMarkupInfo()
+
+        if (response.length === 1) {
+          renderCountry(response)
+          clearMarkupList()
+        } else if (response.length > 1 && response.length <= 10) {
+          renderCountryList(response)
+        }
+      }
+    ).catch(() => {
+      clearMarkupInfo();
+      clearMarkupList();
+  });
 }
+
 function renderCountry(items) {
-  const marcup = items.map(({ name, capital, population, languages, flags }) =>
+  const markup = items.map(({name, capital, population, languages, flags}) =>
     `
        <div class = "wrapp">
        <img src="${flags.svg}" alt = "flag" width = 30px height = 30px>
@@ -72,11 +51,11 @@ function renderCountry(items) {
        <p><strong>Population:</strong> ${population}</p>
        <p><strong>Languages:</strong> ${Object.values(languages).join(', ')}</p>
       `)
-  countryInfo.insertAdjacentHTML("afterbegin", marcup)
+  countryInfo.insertAdjacentHTML("afterbegin", markup)
 }
 
 function renderCountryList(items) {
-  const marcupList = items.map(({ name, flags }) =>
+  const markupList = items.map(({name, flags}) =>
     `<li>
        <div class = "wrapp">
        <img src="${flags.svg}" alt = "flag" width = 30px height = 30px>
@@ -84,12 +63,13 @@ function renderCountryList(items) {
        </div>
        </li>
       `).join("")
-  countryList.insertAdjacentHTML("afterbegin", marcupList)
+  countryList.insertAdjacentHTML("afterbegin", markupList)
 }
-function clearMarcupInfo() {
+
+function clearMarkupInfo() {
   countryInfo.innerHTML = ""
 }
 
-function clearMarcupList() {
+function clearMarkupList() {
   countryList.innerHTML = ""
 }
