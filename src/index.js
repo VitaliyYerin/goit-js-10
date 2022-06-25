@@ -65,12 +65,12 @@ function renderCountry(items) {
   const marcup = items.map(({ name, capital, population, languages, flags }) =>
     `
        <div class = "wrapp">
-       <img src="${flags.svg}" alt = "flag" width = 60px height = 30px>
-       <h1 class = "title"> ${name.official}<h1>
+       <img src="${flags.svg}" alt = "flag" width = 30px height = 30px>
+       <h1 class = "title"> ${name.common}<h1>
        </div>
-       <p>Capital: ${capital}</p>
-       <p>Population: ${population}</p>
-       <p>Languages: ${Object.values(languages)}</p>
+       <p><strong>Capital:</strong> ${capital}</p>
+       <p><strong>Population:</strong> ${population}</p>
+       <p><strong>Languages:</strong> ${Object.values(languages)}</p>
       `).join("")
   countryInfo.insertAdjacentHTML("afterbegin", marcup)
 }
@@ -79,8 +79,8 @@ function renderCountryList(items) {
   const marcupList = items.map(({ name, flags }) =>
     `<li>
        <div class = "wrapp">
-       <img src="${flags.svg}" alt = "flag" width = 30px height = 15px>
-       <h1 class = "title"> ${name.official}<h1>
+       <img src="${flags.svg}" alt = "flag" width = 30px height = 30px>
+       <h1 class = "title"> ${name.common}<h1>
        </div>
        </li>
       `).join("")
