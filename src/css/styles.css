@@ -18,3 +18,37 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+.country-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.country-list li {
+  margin-bottom: 10px;
+}
+
+.wrapp {
+  display: flex;
+  align-items: center;
+}
+
+.wrapp h1 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 0 10px;
+}
+
+.wrapp img {
+  width: 30px;
+  height: 100%;
+}
+
+.country-info .wrapp {
+  margin-bottom: 10px;
+}
+
+.country-info p {
+  margin: 0 0 10px 0;
+}
