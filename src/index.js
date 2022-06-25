@@ -70,8 +70,8 @@ function renderCountry(items) {
        </div>
        <p><strong>Capital:</strong> ${capital}</p>
        <p><strong>Population:</strong> ${population}</p>
-       <p><strong>Languages:</strong> ${Object.values(languages)}</p>
-      `).join("")
+       <p><strong>Languages:</strong> ${Object.values(languages).join(', ')}</p>
+      `)
   countryInfo.insertAdjacentHTML("afterbegin", marcup)
 }
 
