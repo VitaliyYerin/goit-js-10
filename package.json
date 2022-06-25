@@ -2,7 +2,7 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://VitaliyYerin.github.io/goit-js-hw-10",
+  "homepage": "https://vitaliyyerin.github.io/goit-js-hv-10/",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /goit-js-hw-10/"
