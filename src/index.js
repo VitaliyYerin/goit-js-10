@@ -41,11 +41,11 @@ function findCountry(e) {
 }
 
 function renderCountry(items) {
-  const countryInfoEl = items.map(({name, capital, population, languages, flags}) =>
+  const countryInfoEl = items.map(({name: {common}, capital, population, languages, flags: {svg}}) =>
     `
        <div class = "country-heading">
-       <img src="${flags.svg}" alt = "flag" width = 30px height = 30px>
-       <span class = "title"> ${name.common}</span>
+       <img src="${svg}" alt = "flag" width = 30px height = 30px>
+       <span class = "title"> ${common}</span>
        </div>
        <p><strong>Capital:</strong> ${capital}</p>
        <p><strong>Population:</strong> ${population}</p>
@@ -55,11 +55,11 @@ function renderCountry(items) {
 }
 
 function renderCountryList(items) {
-  const countryListEl = items.map(({name, flags}) =>
+  const countryListEl = items.map(({name:{common}, flags:{svg}}) =>
     `<li>
        <div class = "country-heading">
-       <img src="${flags.svg}" alt = "flag" width = 30px height = 30px>
-       <span class = "title"> ${name.common}</span>
+       <img src="${svg}" alt = "flag" width = 30px height = 30px>
+       <span class = "title"> ${common}</span>
        </div>
        </li>
       `).join("")
